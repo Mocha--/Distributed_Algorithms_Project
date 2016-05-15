@@ -12,13 +12,15 @@ public class RecvThread extends Thread{
 	public Receiver receiver;
 	public Sender sender;
 	public Game game;
+	public String nodeId;
 	public ArrayList<String> receivedNodes = new ArrayList<String>();
 	public int lastTurn = 0;
 	
-	public RecvThread(Receiver receiver, Sender sender, Game game) {
+	public RecvThread(Receiver receiver, Sender sender, Game game, String nodeId) {
 		this.receiver = receiver;
 		this.sender = sender;
 		this.game = game;
+		this.nodeId = nodeId;
 	}
 	
 	public void run() {
@@ -32,9 +34,10 @@ public class RecvThread extends Thread{
 				String id = message[0];
 				String turn = message[2];
 				// if in the same turn and never handle this message
-				if(Integer.parseInt(turn) == game.turn && !receivedNodes.contains(id)) {
-					sender.send(message);
-					receivedNodes.add(id);
+				if(Integer.parseInt(turn) == this.game.turn && !this.receivedNodes.contains(id) && !this.nodeId.equals(id)) {
+					this.sender.send(message);
+					this.receivedNodes.add(id);
+					System.out.println("Turn : " + turn + "Handle node " + id);
 				} else {
 					// ignore the message
 				}

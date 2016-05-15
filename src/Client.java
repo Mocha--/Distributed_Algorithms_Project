@@ -15,7 +15,7 @@ public class Client {
 
     public String id;
     public String stage;
-    public Game game;
+    public Game game = new Game();
 
     public Sender sender;
     public Receiver receiver;
@@ -24,14 +24,15 @@ public class Client {
 
     public Client(String id) throws IOException{
     	try {
+    		this.id = id;
     		this.stage = Client.PLAY_STATE;
         	this.mss = new MulticastSocket(Client.port);
         	this.group = InetAddress.getByName(Client.address);
         	this.sender = new Sender(this.mss, this.group);
         	this.receiver = new Receiver(this.mss);
             this.multicastThread = new MulticastThread(this.sender, this.game, this.id);
-            this.recvThread = new RecvThread(this.receiver, this.sender, this.game);
-            this.id = id;
+            this.recvThread = new RecvThread(this.receiver, this.sender, this.game, this.id);
+            this.game = game;
     	} catch (Exception e) {
     		System.out.println(e);
     	} 
