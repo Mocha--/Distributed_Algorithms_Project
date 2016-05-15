@@ -22,21 +22,26 @@ public class Client {
     public MulticastThread multicastThread;
     public RecvThread recvThread;
 
-    public Client() throws IOException{
-        this.stage = Client.JOIN_STAGE;
-    	this.mss = new MulticastSocket(Client.port);
-    	this.group = InetAddress.getByName(Client.address);
-    	this.sender = new Sender(this.mss, this.group);
-    	this.receiver = new Receiver(this.mss);
-        this.multicastThread = new MulticastThread(this.sender, this.game, this.id);
-        this.recvThread = new RecvThread(this.receiver, this.sender, this.game);
+    public Client(String id) throws IOException{
+    	try {
+    		this.stage = Client.PLAY_STATE;
+        	this.mss = new MulticastSocket(Client.port);
+        	this.group = InetAddress.getByName(Client.address);
+        	this.sender = new Sender(this.mss, this.group);
+        	this.receiver = new Receiver(this.mss);
+            this.multicastThread = new MulticastThread(this.sender, this.game, this.id);
+            this.recvThread = new RecvThread(this.receiver, this.sender, this.game);
+            this.id = id;
+    	} catch (Exception e) {
+    		System.out.println(e);
+    	} 
     }
 
-    public void setId(String id){
+    public void setId(String id) {
         this.id = id;
     }
 
-    public void startPlay(){
+    public void startPlay() {
         if(this.stage.equals(Client.PLAY_STATE)){
             this.multicastThread.start();
             this.recvThread.start();
