@@ -4,14 +4,19 @@ import java.net.MulticastSocket;
 
 
 public class Client {
-
+	
+	public static int totalPlayerNum;
     public static int port = 8080;
     public static String address = "224.0.0.1";
+    public static String JOIN_STAGE = "join";
+    public static String PLAY_STATE = "play";
+
     public MulticastSocket mss;
     public InetAddress group;
 
     public int id;
-    public int totalPlayerNum;
+    public String stage;
+    
     public Map map;
     public Snake snake;
     public Sender sender;
@@ -20,6 +25,7 @@ public class Client {
     public RecvThread recvThread;
 
     public Client() throws IOException{
+        this.stage = Client.JOIN_STAGE;
     	this.mss = new MulticastSocket(Client.port);
     	this.group = InetAddress.getByName(Client.address);
     	this.sender = new Sender(this.mss, this.group);
@@ -33,12 +39,23 @@ public class Client {
     }
 
     public void startPlay(){
-        this.multicastThread.start();
-        this.recvThread.start();
+        if(this.stage.equals(Client.PLAY_STATE)){
+            this.multicastThread.start();
+            this.recvThread.start();
+        }
     }
 
     public void joinGame(){
-
+    	this.sender.send([1,"hello"]);
+    	while(true){
+    		String[] msg = this.receiver.receive();
+    		if(msg[0].equals("4")) {
+                this.sender.send([4, 'letsstart']);
+            } else if(msg[1].equals('letsstart')){
+                this.stage = Client.PLAY_STATE;
+                break;
+            }
+    	}
     }
 
 }
