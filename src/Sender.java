@@ -7,7 +7,7 @@ public class Sender {
     public InetAddress group;
     public MulticastSocket mss;
 
-    Sender(MulticastSocket mss,InetAddress group){
+    public Sender(MulticastSocket mss,InetAddress group){
     	this.mss = mss;
         this.group = group;
     }

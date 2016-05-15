@@ -4,9 +4,9 @@ import java.net.MulticastSocket;
 
 public class Receiver {
 	
-	public MulticastSocket mss;
+	MulticastSocket mss;
 	
-	Receiver(MulticastSocket mss) {
+	public Receiver(MulticastSocket mss) {
 		this.mss = mss;
 	}
 	
