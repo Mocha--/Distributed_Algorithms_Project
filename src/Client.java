@@ -12,7 +12,7 @@ public class Client {
 
     public MulticastSocket mss;
     public InetAddress group;
-    
+
     public String id;
     public String stage;
     public Game game;
@@ -28,8 +28,8 @@ public class Client {
     	this.group = InetAddress.getByName(Client.address);
     	this.sender = new Sender(this.mss, this.group);
     	this.receiver = new Receiver(this.mss);
-        this.multicastThread = new MulticastThread(this.sender);
-        this.recvThread = new RecvThread(this.receiver, this.sender);
+        this.multicastThread = new MulticastThread(this.sender, this.game, this.id);
+        this.recvThread = new RecvThread(this.receiver, this.sender, this.game);
     }
 
     public void setId(String id){
