@@ -16,7 +16,7 @@ public class RecvThread extends Thread{
 	public void run() {
 		try {
 			while (true) {
-				String direction = receiver.receive();
+				String direction = this.receiver.receive();
 				System.out.println("Received direction " + direction);
 				System.out.print("Receive Thread Sent Message!");
 			}

@@ -1,7 +1,7 @@
 
 
 import java.util.List;
-class Snake {
+public class Snake {
 
     public int id;
     
