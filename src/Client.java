@@ -5,7 +5,9 @@ import java.net.MulticastSocket;
 class Client {
 
     public static int port = 8080;
-    public static int address = '224.0.0.1';
+    public static String address = "224.0.0.1";
+    public MulticastSocket mss;
+    public InetAddress group;
 
     public int id;
     public int totalPlayerNum;
@@ -15,11 +17,13 @@ class Client {
     public RecvThread recvThread;
 
     public Client(){
-        this.multicastThread = new MulticastThread(mss, group);
+    	this.mss = new MulticastSocket(Client.port);
+    	this.group = InetAddress.getByName(Client.address);
+        this.multicastThread = new MulticastThread(this.mss, this.group);
         this.recvThread = new RecvThread();
     }
 
-    public void setId(id){
+    public void setId(int id){
         this.id = id;
     }
 
