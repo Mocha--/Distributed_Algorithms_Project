@@ -1,4 +1,5 @@
 
-class Map {
-
+public class Map {
+	
+	public Map(){}
 }

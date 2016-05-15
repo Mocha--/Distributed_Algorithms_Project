@@ -5,11 +5,9 @@ import java.net.MulticastSocket;
 public class Receiver {
 	
 	MulticastSocket mss;
-	InetAddress group;
 	
-	public Receiver(MulticastSocket mss, InetAddress group) {
+	public Receiver(MulticastSocket mss) {
 		this.mss = mss;
-		this.group = group;
 	}
 	
 	public String receive() throws Exception{

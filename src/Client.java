@@ -13,14 +13,17 @@ class Client {
     public int totalPlayerNum;
     public Map map;
     public Snake snake;
+    public Sender sender;
+    public Receiver receiver;
     public MulticastThread multicastThread;
     public RecvThread recvThread;
 
     public Client(){
     	this.mss = new MulticastSocket(Client.port);
     	this.group = InetAddress.getByName(Client.address);
-        this.multicastThread = new MulticastThread(this.mss, this.group);
-        this.recvThread = new RecvThread();
+    	this.sender = new Sender(this.mss, this.group);
+        this.multicastThread = new MulticastThread(this.sender);
+        this.recvThread = new RecvThread(this.receiver);
     }
 
     public void setId(int id){

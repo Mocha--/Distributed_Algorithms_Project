@@ -6,8 +6,8 @@ import java.net.InetAddress;
 import java.net.MulticastSocket;
 
 public class MulticastThread extends Thread {
+	public Sender sender;
 	
-	Sender sender = new Sender();
 	public MulticastThread(Sender sender) {
 		this.sender = sender;
 	}
