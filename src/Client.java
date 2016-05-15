@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
-
 public class Client {
 
     public static int port = 8080;
@@ -25,7 +24,7 @@ public class Client {
     	this.sender = new Sender(this.mss, this.group);
     	this.receiver = new Receiver(this.mss);
         this.multicastThread = new MulticastThread(this.sender);
-        this.recvThread = new RecvThread(this.receiver);
+        this.recvThread = new RecvThread(this.receiver, this.sender);
     }
 
     public void setId(int id){

@@ -8,16 +8,26 @@ import java.net.MulticastSocket;
 public class RecvThread extends Thread{
 	
 	public Receiver receiver;
+	public Sender sender;
+	public String[] receivedNodes = {};
 	
-	public RecvThread(Receiver receiver) {
+	public RecvThread(Receiver receiver, Sender sender) {
 		this.receiver = receiver;
+		this.sender = sender;
 	}
 	
 	public void run() {
 		try {
 			while (true) {
-				String direction = this.receiver.receive();
-				System.out.println("Received direction " + direction);
+				String[] message = this.receiver.receive();
+				System.out.println("Received message " + message);
+				/*
+				 *  1. parse message, get id, direction, turn 
+				    2. get lastTurn from node
+				    3. if lastTurn == turn, send message, else, do not send
+				 * 
+				 */
+				//sender.send(message);
 				System.out.print("Receive Thread Sent Message!");
 			}
 		} catch(Exception e) {
