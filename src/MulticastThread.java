@@ -7,6 +7,7 @@ import java.net.MulticastSocket;
 
 public class MulticastThread extends Thread {
 	public Sender sender;
+	public Game game;
 	
 	public MulticastThread(Sender sender) {
 		this.sender = sender;

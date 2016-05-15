@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.util.Arrays;
 
 public class Sender {
     public InetAddress group;
@@ -12,8 +13,9 @@ public class Sender {
         this.group = group;
     }
 
-    public void send(String msg) throws IOException{
-        byte[] buffer = msg.getBytes();
+    public void send(String[] msg) throws IOException{
+        String msgStr = Arrays.toString(msg);
+        byte[] buffer = msgStr.getBytes();
         DatagramPacket dp = new DatagramPacket(buffer, buffer.length, this.group, Client.port);
         this.mss.send(dp);
     }

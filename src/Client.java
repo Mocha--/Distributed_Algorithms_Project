@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
 
-
 public class Client {
 	
 	public static int totalPlayerNum;
@@ -16,9 +15,8 @@ public class Client {
 
     public int id;
     public String stage;
-    
-    public Map map;
-    public Snake snake;
+    public Game game;
+
     public Sender sender;
     public Receiver receiver;
     public MulticastThread multicastThread;
@@ -31,7 +29,7 @@ public class Client {
     	this.sender = new Sender(this.mss, this.group);
     	this.receiver = new Receiver(this.mss);
         this.multicastThread = new MulticastThread(this.sender);
-        this.recvThread = new RecvThread(this.receiver);
+        this.recvThread = new RecvThread(this.receiver, this.sender);
     }
 
     public void setId(int id){
@@ -45,13 +43,13 @@ public class Client {
         }
     }
 
-    public void joinGame(){
-    	this.sender.send([1,"hello"]);
+    public void joinGame() throws Exception {
+    	this.sender.send(new String[]{"1", "hello"});
     	while(true){
     		String[] msg = this.receiver.receive();
     		if(msg[0].equals("4")) {
-                this.sender.send([4, 'letsstart']);
-            } else if(msg[1].equals('letsstart')){
+                this.sender.send(new String[]{"4", "letsstart"});
+            } else if(msg[1].equals("letsstart")){
                 this.stage = Client.PLAY_STATE;
                 break;
             }
