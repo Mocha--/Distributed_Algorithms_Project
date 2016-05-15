@@ -7,7 +7,7 @@ import java.net.MulticastSocket;
 
 public class RecvThread extends Thread{
 	
-	Receiver receiver;
+	public Receiver receiver;
 	
 	public RecvThread(Receiver receiver) {
 		this.receiver = receiver;
