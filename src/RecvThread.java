@@ -4,31 +4,40 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class RecvThread extends Thread{
 	
 	public Receiver receiver;
 	public Sender sender;
-	public String[] receivedNodes = {};
+	public Game game;
+	public ArrayList<String> receivedNodes = new ArrayList<String>();
+	public int lastTurn = 0;
 	
-	public RecvThread(Receiver receiver, Sender sender) {
+	public RecvThread(Receiver receiver, Sender sender, Game game) {
 		this.receiver = receiver;
 		this.sender = sender;
+		this.game = game;
 	}
 	
 	public void run() {
 		try {
 			while (true) {
+				if(game.turn > lastTurn) {
+					lastTurn = game.turn;
+					this.receivedNodes = new ArrayList<String>();
+				}
 				String[] message = this.receiver.receive();
-				System.out.println("Received message " + message);
-				/*
-				 *  1. parse message, get id, direction, turn 
-				    2. get lastTurn from node
-				    3. if lastTurn == turn, send message, else, do not send
-				 * 
-				 */
-				//sender.send(message);
-				System.out.print("Receive Thread Sent Message!");
+				String id = message[0];
+				String turn = message[2];
+				// if in the same turn and never handle this message
+				if(Integer.parseInt(turn) == game.turn && !receivedNodes.contains(id)) {
+					sender.send(message);
+					receivedNodes.add(id);
+				} else {
+					// ignore the message
+				}
 			}
 		} catch(Exception e) {
 			System.out.println("Receive Thread Error!");

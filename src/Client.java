@@ -9,7 +9,7 @@ public class Client {
     public MulticastSocket mss;
     public InetAddress group;
 
-    public int id;
+    public String id;
     public int totalPlayerNum;
     public Map map;
     public Snake snake;
@@ -27,7 +27,7 @@ public class Client {
         this.recvThread = new RecvThread(this.receiver, this.sender);
     }
 
-    public void setId(int id){
+    public void setId(String id){
         this.id = id;
     }
 
