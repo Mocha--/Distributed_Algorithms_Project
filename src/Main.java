@@ -12,7 +12,7 @@ public class Main {
 //			window.setSize(800, 800);
 //			window.setVisible(true);
 //			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			Client client = new Client("100");
+			Client client = new Client("1");
 			client.startPlay();
 		} catch (Exception e) {
 			System.out.println("Main Method Error!");

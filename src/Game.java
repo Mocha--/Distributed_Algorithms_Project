@@ -30,4 +30,13 @@ public class Game {
 			return false;
 		}
 	}
+
+	public Snake getSnakeById(String id){
+		for (Snake snake : this.allSnakes){
+			if (snake.id.equals(id)){
+				return snake;
+			}
+		}
+		return null;
+	}
 }

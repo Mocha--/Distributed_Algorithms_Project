@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.*;
 
 public class Snake {
@@ -8,13 +9,13 @@ public class Snake {
     public static String DOWN = "down";
     public static String DEFAULT_DIRECTION = "up";
 
-    public static String COLOR_BLUE = "blue";
-    public static String COLOR_RED = "red";
-    public static String COLOR_BLACK = "black";
-    public static String COLOR_GREEN = "green";
+    public static Color COLOR_BLUE = Color.BLUE;
+    public static Color COLOR_RED = Color.RED;
+    public static Color COLOR_BLACK = Color.BLACK;
+    public static Color COLOR_GREEN = Color.GREEN;
 
     public String id;
-    public String color;
+    public Color color;
     public ArrayList<Coordinate> body;
     public String direction;
     public Coordinate head;
