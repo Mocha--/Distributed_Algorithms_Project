@@ -17,12 +17,10 @@ public class Cube extends JPanel {
      
     public void paintComponent(Graphics g) {
 
-        for (int i = 0; i < Map.height; i++)
-        {
-            for (int j = 0; j < Map.width; j++)
-            {
-                g.setColor(this.map.pos[i][j]);
-                g.fill3DRect(j * width, i * height, size, size, true);
+        for (int row = 0; row < Map.height; row++) {
+            for (int col = 0; col < Map.width; col++) {
+                g.setColor(this.map.pos[row][col]);
+                g.fill3DRect(col * width, row * height, size, size, true);
             }
         }
     }

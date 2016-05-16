@@ -21,13 +21,5 @@ public class Window extends JFrame {
 		// add keyboard listener to the window
 		this.addKeyListener((KeyListener) new KeyboardListener(this.game));
 	}
-	
-	public void updateWindow() {
-		// remove old window
-		this.remove(this.cube);
-		this.cube = new Cube(this.game.map);
-		// add new window
-		this.add(this.cube);
-	}
 }
 
