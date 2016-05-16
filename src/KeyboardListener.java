@@ -2,6 +2,11 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 class KeyboardListener extends KeyAdapter{
+	public Game game;
+	
+	public KeyboardListener(Game game) {
+		this.game = game;
+	}
 	
 	public void keyPressed(KeyEvent e) {
 		int keyCode = e.getKeyCode();
@@ -28,6 +33,7 @@ class KeyboardListener extends KeyAdapter{
 	
 	private void changeDirection(String direction) {
 		// change snake direction
+		this.game.mySnake.direction = direction;
 	}
 }
 

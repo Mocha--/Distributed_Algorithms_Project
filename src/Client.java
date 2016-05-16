@@ -34,6 +34,7 @@ public class Client {
             this.multicastThread = new MulticastThread(this.sender, this.game, this.id);
             this.recvThread = new RecvThread(this.receiver, this.sender, this.game, this.id);
     	} catch (Exception e) {
+    		System.out.println("Client Init Error!");
     		System.out.println(e);
     	} 
     }

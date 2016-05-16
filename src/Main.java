@@ -7,12 +7,8 @@ public class Main {
 	
 	public static void main(String[] args) throws Exception {
 		try {
-//			Window window = new Window();
-//			window.setTitle("Title");
-//			window.setSize(800, 800);
-//			window.setVisible(true);
-//			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			Client client = new Client("1");
+			Window window = new Window(client);
 			client.startPlay();
 		} catch (Exception e) {
 			System.out.println("Main Method Error!");

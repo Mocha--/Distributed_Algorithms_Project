@@ -1,23 +1,23 @@
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.KeyListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-
-public class Window extends JFrame{
-	public Window() {
-		getContentPane().setLayout(new GridLayout());
-		for(int i = 0; i < 20; i++) {
-			for(int j = 0; j < 20; j++) {
-				JPanel panel = new JPanel();
-				panel.setBackground(Color.red);
-				getContentPane().add(panel);
-			}
-		}
+public class Window extends JFrame {
+	public Client client;
+	public Window(Client client) {
+		this.client = client;
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.add(new Cube(client.game.map));
+        this.pack();
+        this.setVisible(true);
 		// add keyboard listener to the window
-		this.addKeyListener((KeyListener) new KeyboardListener());
+		this.addKeyListener((KeyListener) new KeyboardListener(client.game));
 	}
 }
+

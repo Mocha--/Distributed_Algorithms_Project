@@ -21,8 +21,13 @@ public class Map {
 		this.refresh();
 	}
 
-	public void refresh(){
-		for(Snake snake : this.snakes){
+	public void refresh() {
+		for (int i = 0 ; i <= Map.width - 1 ; i++) {
+			for( int j = 0 ; j <= Map.height - 1; j++) {
+				this.setPos(i, j, Map.EMPTY_COLOR);
+			}
+		}
+		for(Snake snake : this.snakes) {
 			this.drawSnake(snake);
 		}
 	}
