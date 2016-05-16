@@ -10,21 +10,19 @@ public class Cube extends JPanel {
     private int size = 20;
     public Map map;
      
-    public Cube(Map map)
-    {
+    public Cube(Map map) {
     	this.map = map;
         this.setPreferredSize(new Dimension(height * size + 10 ,width * size + 35));    
     }
      
-    public void paintComponent(Graphics g)
-    {
+    public void paintComponent(Graphics g) {
 
         for (int i = 0; i < Map.height; i++)
         {
             for (int j = 0; j < Map.width; j++)
             {
                 g.setColor(this.map.pos[i][j]);
-                g.fill3DRect(i * width, j * height, size, size, true);
+                g.fill3DRect(j * width, i * height, size, size, true);
             }
         }
     }

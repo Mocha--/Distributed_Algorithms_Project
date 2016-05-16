@@ -7,7 +7,7 @@ public class Snake {
     public static String RIGHT = "right";
     public static String UP = "up";
     public static String DOWN = "down";
-    public static String DEFAULT_DIRECTION = "up";
+    public static String DEFAULT_DIRECTION = "right";
 
     public static Color COLOR_BLUE = Color.BLUE;
     public static Color COLOR_RED = Color.RED;
@@ -46,14 +46,14 @@ public class Snake {
         this.direction = Snake.DEFAULT_DIRECTION;
     }
 
-    public Coordinate move(String direction){
-        if(direction.equals(Snake.LEFT)){
+    public Coordinate move(){
+        if(this.direction.equals(Snake.LEFT)){
             this.body.add(new Coordinate(this.head.row, this.head.col - 1));
-        } else if (direction.equals(Snake.RIGHT)){
+        } else if (this.direction.equals(Snake.RIGHT)){
             this.body.add(new Coordinate(this.head.row, this.head.col + 1));
-        } else if (direction.equals(Snake.UP)){
+        } else if (this.direction.equals(Snake.UP)){
             this.body.add(new Coordinate(this.head.row - 1, this.head.col));
-        } else if( direction.equals(Snake.DOWN)){
+        } else if( this.direction.equals(Snake.DOWN)){
             this.body.add(new Coordinate(this.head.row + 1, this.head.col));
         } else {
             System.out.print("wrong direction");
@@ -69,6 +69,14 @@ public class Snake {
             }
         }
         return false;
+    }
+
+    public boolean isCrashingBorder(){
+        if (this.head.row < 0 || this.head.row >= Map.height || this.head.col < 0 || this.head.col >= Map.width){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean isCrashingSomeone(Snake snake){

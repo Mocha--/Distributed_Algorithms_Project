@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class Map {
 
-	public static int width = 10;
+	public static int width = 5;
 	public static int height = 10;
 	public static Color EMPTY_COLOR = Color.GRAY;
 
@@ -12,9 +12,9 @@ public class Map {
 	
 	public Map(ArrayList<Snake> snakes){
 		this.pos = new Color[Map.height][Map.width];
-		for (int i = 0 ; i <= Map.width - 1 ; i++){
-			for( int j = 0 ; j <= Map.height - 1; j++){
-				this.setPos(i, j, Map.EMPTY_COLOR);
+		for (int row = 0 ; row <= Map.height - 1 ; row++){
+			for( int col = 0 ; col <= Map.width - 1; col++){
+				this.setPos(row, col, Map.EMPTY_COLOR);
 			}
 		}
 		this.snakes = snakes;
@@ -22,9 +22,9 @@ public class Map {
 	}
 
 	public void refresh() {
-		for (int i = 0 ; i <= Map.width - 1 ; i++) {
-			for( int j = 0 ; j <= Map.height - 1; j++) {
-				this.setPos(i, j, Map.EMPTY_COLOR);
+		for (int row = 0 ; row <= Map.height - 1 ; row++) {
+			for( int col = 0 ; col <= Map.width - 1; col++) {
+				this.setPos(row, col, Map.EMPTY_COLOR);
 			}
 		}
 		for(Snake snake : this.snakes) {

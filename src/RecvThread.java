@@ -13,21 +13,23 @@ public class RecvThread extends Thread{
 	public Sender sender;
 	public Game game;
 	public String nodeId;
-	public ArrayList<String> receivedNodes = new ArrayList<String>();
-	public int lastTurn = 0;
+	public ArrayList<String> receivedNodes;
+	public int lastTurn;
 	
 	public RecvThread(Receiver receiver, Sender sender, Game game, String nodeId) {
+		this.receivedNodes = new ArrayList<String>();
 		this.receiver = receiver;
 		this.sender = sender;
 		this.game = game;
 		this.nodeId = nodeId;
+		this.lastTurn = 0;
 	}
 	
 	public void run() {
 		try {
 			while (true) {
-				if(game.turn > lastTurn) {
-					lastTurn = game.turn;
+				if(game.turn > this.lastTurn) {
+					this.lastTurn = game.turn;
 					this.receivedNodes = new ArrayList<String>();
 				}
 				String[] message = this.receiver.receive();
