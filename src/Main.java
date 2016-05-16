@@ -7,7 +7,7 @@ public class Main {
 	
 	public static void main(String[] args) throws Exception {
 		try {
-			Client client = new Client("222");
+			Client client = new Client("1");
 			Window window = new Window(client);
 			client.startPlay();
 		} catch (Exception e) {

@@ -9,8 +9,8 @@ public class Map {
 	
 	public Map(ArrayList<Snake> snakes){
 		this.pos = new int[Map.height][Map.width];
-		for (int i = 0 ; i <= Map.width - 1 ; i++){
-			for( int j = 0 ; j <= Map.height - 1; j++){
+		for (int i = 0 ; i <= Map.width - 1 ; i++) {
+			for( int j = 0 ; j <= Map.height - 1; j++) {
 				this.pos[i][j] = 0;
 			}
 		}
@@ -18,19 +18,24 @@ public class Map {
 		this.refresh();
 	}
 
-	public void refresh(){
-		for(Snake snake : this.snakes){
+	public void refresh() {
+		for (int i = 0 ; i <= Map.width - 1 ; i++) {
+			for( int j = 0 ; j <= Map.height - 1; j++) {
+				this.pos[i][j] = 0;
+			}
+		}
+		for(Snake snake : this.snakes) {
 			this.drawSnake(snake);
 		}
 	}
 
-	public void drawSnake(Snake snake){
-		for (Coordinate coor : snake.body){
+	public void drawSnake(Snake snake) {
+		for (Coordinate coor : snake.body) {
 			this.setPos(coor.row, coor.col, Integer.parseInt(snake.id));
 		}
 	}
 
-	public void setPos(int row, int col, int val){
+	public void setPos(int row, int col, int val) {
 		this.pos[row][col] = val;
 	}
 }

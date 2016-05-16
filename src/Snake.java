@@ -21,6 +21,7 @@ public class Snake {
     
     public Snake(String id) {
         this.id = id;
+        this.body = new ArrayList<Coordinate>();
         if (this.id.equals("1")){
             Coordinate coor = new Coordinate(0, 0);
             this.color = Snake.COLOR_BLUE;
