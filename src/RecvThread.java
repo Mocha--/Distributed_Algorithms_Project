@@ -33,6 +33,7 @@ public class RecvThread extends Thread{
 				String[] message = this.receiver.receive();
 				String id = message[0];
 				String turn = message[2];
+				System.out.println("hehehe");
 				// if in the same turn and never handle this message
 				if(Integer.parseInt(turn) == this.game.turn && !this.receivedNodes.contains(id) && !this.nodeId.equals(id)) {
 					this.sender.send(message);
