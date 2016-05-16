@@ -4,7 +4,7 @@ import java.net.MulticastSocket;
 
 public class Client {
 	
-	public static int totalPlayerNum;
+	public static int TOTAL_PLAYER_NUM = 4;
     public static int port = 8080;
     public static String address = "224.0.0.1";
     public static String JOIN_STAGE = "join";
@@ -58,12 +58,12 @@ public class Client {
     }
 
     public void joinGame() throws Exception {
-    	this.sender.send(new String[]{"1", "hello"});
+    	this.sender.send(Message.joinGame(this.id));
     	while(true){
     		String[] msg = this.receiver.receive();
-    		if(msg[0].equals("4")) {
-                this.sender.send(new String[]{"4", "letsstart"});
-            } else if(msg[1].equals("letsstart")){
+    		if(msg[0].equals(Integer.toString(Client.TOTAL_PLAYER_NUM))) {
+                this.sender.send(Message.startGame(this.id));
+            } else if(msg[0].equals(Integer.toString(Client.TOTAL_PLAYER_NUM)) && msg[1].equals(Message.START_GAME)){
                 this.stage = Client.PLAY_STATE;
                 break;
             }
