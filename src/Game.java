@@ -1,12 +1,21 @@
+import java.util.ArrayList;
+
 public class Game {
-	
-	public Snake snake;
-	public Integer turn;
+
+	public Snake mySnake;
+	public int turn;
 	public Map map;
+	public ArrayList<Snake> otherSnakes;
 	
-	public Game(Snake snake, Map map) {
+	public Game(String id) {
 		this.turn = 0;
-		this.map = map;
-		this.snake = snake;
+	}
+
+	public boolean isGameOver(){
+		if (this.mySnake.isCrashingAnyone(this.otherSnakes)){
+			return true;
+		} else {
+			return false;
+		}
 	}
 }
