@@ -22,7 +22,6 @@ public class MulticastThread extends Thread {
 				// send id, direction, turn
 				String[] message = new String [] {id, "direction", String.valueOf(game.turn)};
 				sender.send(message);
-				System.out.print("Multicast Thread Sent Message!");
 				Thread.sleep(1000);
 			}
 		} catch(Exception e) {
