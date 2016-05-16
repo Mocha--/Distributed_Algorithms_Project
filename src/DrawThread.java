@@ -13,6 +13,7 @@ public class DrawThread extends Thread {
         try {
             while (true) {
                 sleep(Client.GAME_INTERVAL);
+                this.window.game.map.refresh();
                 this.window.repaint();
             }
         } catch (InterruptedException e) {

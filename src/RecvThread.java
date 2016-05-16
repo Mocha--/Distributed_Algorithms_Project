@@ -15,12 +15,10 @@ public class RecvThread extends Thread{
 	public Sender sender;
 	public Game game;
 	public int nodeId;
-	public ArrayList<String> receivedNodes;
 	public int lastTurn;
 	public int[] nodes;
 	
 	public RecvThread(Receiver receiver, Sender sender, Game game, String nodeId) {
-		this.receivedNodes = new ArrayList<String>();
 		this.receiver = receiver;
 		this.sender = sender;
 		this.game = game;
@@ -28,14 +26,14 @@ public class RecvThread extends Thread{
 		this.nodeId = Integer.parseInt(nodeId);
 		this.lastTurn = 0;
 		// nodes[1] = 0
-		this.nodes = new int[5];
-		for(int i = 0; i < 5; i++) {
+		this.nodes = new int[Client.TOTAL_PLAYER_NUM + 1];
+		for(int i = 0; i < Client.TOTAL_PLAYER_NUM + 1; i++) {
 			this.nodes[i] = 0;
 		}
 	}
 	
 	public void resetNodes() {
-		for(int i = 0; i < 5; i++) {
+		for(int i = 0; i < Client.TOTAL_PLAYER_NUM + 1; i++) {
 			this.nodes[i] = 0;
 		}
 	}
@@ -45,11 +43,11 @@ public class RecvThread extends Thread{
 			while (true) {
 				if(this.game.turn > this.lastTurn) {
 					this.lastTurn = game.turn;
-					this.receivedNodes = new ArrayList<String>();
 				}
 				String[] message = this.receiver.receive();
 				String id = message[0];
 				String turn = message[2];
+				String direction = message[3];
 				
 				// make sure in the same turn
 				if(Integer.parseInt(turn) == this.game.turn) {
@@ -57,22 +55,16 @@ public class RecvThread extends Thread{
 					// first time receive message from this node
 					if(this.nodes[nodeId] == 0 && nodeId != this.nodeId) {
 						this.sender.send(message);
-						this.nodes[nodeId] = 1;
 						System.out.println("first time receive message from node " + nodeId);
-					} else {
-						this.nodes[nodeId]++ ;
 					}
-					
-					int sum = 0;
+					this.nodes[nodeId]++ ;
 					// check
-					for(int i = 0; i < 5; i++) {
-						sum += this.nodes[i];
-					}
-					// (n - 1) * n messages
-					if(sum == 12) {
-						resetNodes();
-						this.game.mySnake.move();
-						this.game.map.refresh();
+					for(int i = 1; i < 5; i++) {
+						if(this.nodes[i] == Client.TOTAL_PLAYER_NUM - 1) {
+							this.game.getSnakeById(Integer.toString(i)).setDirection(direction);
+							this.game.getSnakeById(Integer.toString(i)).move();
+							this.nodes[i] = 0;
+						}
 					}
 				}
 			}
