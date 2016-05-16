@@ -6,9 +6,21 @@ public class Game {
 	public int turn;
 	public Map map;
 	public ArrayList<Snake> otherSnakes;
+	public ArrayList<Snake> allSnakes;
 	
 	public Game(String id) {
 		this.turn = 0;
+		this.mySnake = new Snake(id);
+		this.otherSnakes = new ArrayList<Snake>();
+		for(int i = 1 ; i <= 4; i++){
+			if (Integer.parseInt(id) != i){
+				Snake snake = new Snake(Integer.toString(i));
+				this.otherSnakes.add(snake);
+			}
+		}
+		this.allSnakes = this.otherSnakes;
+		this.allSnakes.add(this.mySnake);
+		this.map = new Map(this.allSnakes);
 	}
 
 	public boolean isGameOver(){
