@@ -61,7 +61,7 @@ public class Client {
     	this.sender.send(Message.joinGame(this.id));
     	while(true){
     		String[] msg = this.receiver.receive();
-    		if(msg[0].equals(Integer.toString(Client.TOTAL_PLAYER_NUM))) {
+    		if(this.id.equals(Integer.toString(Client.TOTAL_PLAYER_NUM)) && msg[0].equals(Integer.toString(Client.TOTAL_PLAYER_NUM))) {
                 this.sender.send(Message.startGame(this.id));
             } else if(msg[0].equals(Integer.toString(Client.TOTAL_PLAYER_NUM)) && msg[1].equals(Message.START_GAME)){
                 this.stage = Client.PLAY_STATE;
