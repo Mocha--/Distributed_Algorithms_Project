@@ -20,7 +20,7 @@ public class MulticastThread extends Thread {
 		try {
 			while(true){
 				// send id, direction, turn
-				String[] message = new String [] {id, this.game.mySnake.direction, String.valueOf(game.turn)};
+				String[] message = Message.nextDirection(id, this.game.turn, this.game.mySnake.direction);
 				sender.send(message);
 				Thread.sleep(Client.GAME_INTERVAL);
 			}
