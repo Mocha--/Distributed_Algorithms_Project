@@ -12,7 +12,6 @@ public class Main {
 //			window.setSize(800, 800);
 //			window.setVisible(true);
 //			window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			System.out.println("hehehe");
 			Client client = new Client("100");
 			client.startPlay();
 		} catch (Exception e) {
