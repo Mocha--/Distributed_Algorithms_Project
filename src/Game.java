@@ -39,4 +39,15 @@ public class Game {
 		}
 		return null;
 	}
+
+	public boolean removeSnakeById(String id){
+		Snake snake = this.getSnakeById(id);
+		if (snake == null) {
+			return false;
+		} else {
+			this.allSnakes.remove(snake);
+			return true;
+		}
+
+	}
 }

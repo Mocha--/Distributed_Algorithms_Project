@@ -88,5 +88,9 @@ public class Snake {
         return false;
     }
 
+    public void setDirection(String direction){
+        this.direction = direction;
+    }
+
 
 }
