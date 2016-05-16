@@ -16,6 +16,7 @@ public class Client {
     public String id;
     public String stage;
     public Game game;
+    public Window window;
 
     public Sender sender;
     public Receiver receiver;
@@ -26,6 +27,7 @@ public class Client {
     	try {
     		this.id = id;
             this.game = new Game(this.id);
+            this.window = new Window(this.game);
     		this.stage = Client.PLAY_STATE;
         	this.mss = new MulticastSocket(Client.port);
         	this.group = InetAddress.getByName(Client.address);

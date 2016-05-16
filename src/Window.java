@@ -9,15 +9,25 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Window extends JFrame {
-	public Client client;
-	public Window(Client client) {
-		this.client = client;
+	public Game game;
+	public Cube cube;
+	public Window(Game game) {
+		this.game = game;
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.add(new Cube(client.game.map));
+		this.cube = new Cube(this.game.map);
+        this.add(this.cube);
         this.pack();
         this.setVisible(true);
 		// add keyboard listener to the window
-		this.addKeyListener((KeyListener) new KeyboardListener(client.game));
+		this.addKeyListener((KeyListener) new KeyboardListener(this.game));
+	}
+	
+	public void updateWindow() {
+		// remove old window
+		this.remove(this.cube);
+		this.cube = new Cube(this.game.map);
+		// add new window
+		this.add(this.cube);
 	}
 }
 
