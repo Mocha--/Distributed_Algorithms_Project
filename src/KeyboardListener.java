@@ -11,19 +11,19 @@ class KeyboardListener extends KeyAdapter{
 	public void keyPressed(KeyEvent e) {
 		int keyCode = e.getKeyCode();
 		String direction = "up";
-		if(keyCode == 37) {
+		if(keyCode == 37 && this.game.mySnake.direction != "right") {
 			// left
 			direction = "left";
 			changeDirection(direction);
-		} else if(keyCode == 38) {
+		} else if(keyCode == 38 && this.game.mySnake.direction != "down") {
 			// up
 			direction = "up";
 			changeDirection(direction);
-		} else if(keyCode == 39) {
+		} else if(keyCode == 39 && this.game.mySnake.direction != "left") {
 			// right
 			direction = "right";
 			changeDirection(direction);
-		} else if(keyCode == 40) {
+		} else if(keyCode == 40 && this.game.mySnake.direction != "up") {
 			// down
 			direction = "down";
 			changeDirection(direction);
