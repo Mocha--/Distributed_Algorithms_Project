@@ -39,11 +39,11 @@ public class Client {
     			this.nodes[i] = 0;
     		}
 
-            this.serverSocket = new ServerSocket(this.port);
+            this.serverSocket = new ServerSocket(Client.port);
             this.sessionThreads = new ArrayList<SessionThread>();
             this.clientSockets = new ArrayList<MySocket>();
             this.sender = new Sender(this.clientSockets);
-            this.drawThread = new DrawThread(this.window);
+            this.drawThread = new DrawThread(this.window, this);
 
             // join stage
             this.userInputThread = new UserInputThread(this);

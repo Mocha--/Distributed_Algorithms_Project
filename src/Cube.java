@@ -1,10 +1,13 @@
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
 public class Cube extends JPanel {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int height = 22;   
     private int width = 22;        
     private int size = 20;
