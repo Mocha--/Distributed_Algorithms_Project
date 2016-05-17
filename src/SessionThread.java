@@ -9,15 +9,20 @@ public class SessionThread extends Thread {
 
     public MySocket socket;
     public Client client;
+	public boolean isEnded;
 
     public SessionThread(MySocket socket, Client client) {
         this.socket = socket;
         this.client = client;
+		this.isEnded = false;
     }
 
     public void run() {
         try{
             while(true) {
+				if (this.isEnded){
+					break;
+				}
             	// receive message
             	String[] message = this.socket.recvMsg();
                 if (message == null){
@@ -48,11 +53,12 @@ public class SessionThread extends Thread {
     							// move the snake
     							this.client.game.getSnakeById(Integer.toString(i)).move();
     							if(this.client.game.mySnake.isCrashingBorder() || this.client.game.mySnake.isCrashingAnyone(this.client.game.allSnakes)) {
-    								this.client.sender.send(Message.gameOver(this.client.id));
     								for(SessionThread s: this.client.sessionThreads) {
     									s.socket.end();
     								}
                                     this.client.sender.end();
+									this.isEnded = true;
+
     							}
     							// reset the node record
     							this.client.nodes[i] = 0;
