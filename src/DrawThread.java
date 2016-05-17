@@ -14,7 +14,7 @@ public class DrawThread extends Thread {
     public void run(){
         try {
             while (true) {
-                if (this.client.equals(Client.GAME_OVER_STAGE)){
+                if (this.client.stage.equals(Client.GAME_OVER_STAGE)){
                     break;
                 }
                 sleep(Client.GAME_INTERVAL);
@@ -24,5 +24,6 @@ public class DrawThread extends Thread {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        System.exit(0);
     }
 }
