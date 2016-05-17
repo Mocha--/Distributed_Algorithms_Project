@@ -51,7 +51,7 @@ public class UserInputThread extends Thread {
             }
         }
 
-        this.client.stage = Client.PLAY_STATE;
+        this.client.stage = Client.PLAY_STAGE;
         System.out.println("Connect to All, Waiting for Others: ");
     }
 

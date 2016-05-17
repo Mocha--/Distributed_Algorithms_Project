@@ -22,14 +22,24 @@ public class SessionThread extends Thread {
 					System.out.println(this.client.id);
 					break;
 				}
+
             	// receive message
             	String[] message = this.socket.recvMsg();
+				// because the disconnection of client socket
                 if (message == null){
                     this.socket.end();
+					this.client.sessionThreads.remove(this);
+					System.out.println(this.client.sessionThreads.size());
+					if (this.client.sessionThreads.size() == 0){
+						this.client.sender.end();
+						this.client.stage = Client.GAME_WIN_STAGE;
+					}
                     break;
                 }
+
             	String id = message[0];
             	String type = message[1];
+
             	// game is running
             	if(type.equals(Message.NEXT_DIRECTION)) {
             		String turn = message[2];
@@ -51,6 +61,8 @@ public class SessionThread extends Thread {
     							this.client.game.getSnakeById(Integer.toString(i)).setDirection(direction);
     							// move the snake
     							this.client.game.getSnakeById(Integer.toString(i)).move();
+
+								// game over
     							if(this.client.game.mySnake.isCrashingBorder() || this.client.game.mySnake.isCrashingAnyone(this.client.game.allSnakes)) {
     								for(SessionThread s: this.client.sessionThreads) {
     									s.socket.end();

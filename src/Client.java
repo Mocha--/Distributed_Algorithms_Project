@@ -7,8 +7,9 @@ public class Client {
 	public static int TOTAL_PLAYER_NUM = 2;
     public static int port = 8080;
     public static String JOIN_STAGE = "join";
-    public static String PLAY_STATE = "play";
+    public static String PLAY_STAGE = "play";
     public static String GAME_OVER_STAGE = "gameover";
+    public static String GAME_WIN_STAGE = "gamewin";
     public static int GAME_INTERVAL = 500;
     // all nodes info
     public int[] nodes;
