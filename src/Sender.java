@@ -2,11 +2,15 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Sender {
     public InetAddress group;
     public MulticastSocket mss;
+
+    public ArrayList<Socket> sockets;
 
     public Sender(MulticastSocket mss,InetAddress group){
     	this.mss = mss;

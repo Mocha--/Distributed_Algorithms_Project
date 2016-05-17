@@ -1,12 +1,13 @@
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.MulticastSocket;
+import java.net.NetworkInterface;
 
 public class Client {
 	
 	public static int TOTAL_PLAYER_NUM = 4;
-    public static int port = 8080;
-    public static String address = "224.0.0.1";
+    public static int port = 12000;
+    public static String address = "230.0.0.1";
     public static String JOIN_STAGE = "join";
     public static String PLAY_STATE = "play";
     public static int GAME_INTERVAL = 1000;
@@ -35,6 +36,8 @@ public class Client {
         	this.group = InetAddress.getByName(Client.address);
         	this.sender = new Sender(this.mss, this.group);
         	this.receiver = new Receiver(this.mss);
+            NetworkInterface ni = NetworkInterface.getByName("etho0");
+            this.mss.joinGroup(this.group);
 
             this.multicastThread = new MulticastThread(this.sender, this.game, this.id);
             this.recvThread = new RecvThread(this.receiver, this.sender, this.game, this.id);
@@ -58,6 +61,9 @@ public class Client {
     }
 
     public void joinGame() throws Exception {
+        if (this.stage.equals(Client.PLAY_STATE)){
+            return;
+        }
     	this.sender.send(Message.joinGame(this.id));
     	while(true){
     		String[] msg = this.receiver.receive();

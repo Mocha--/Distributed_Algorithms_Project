@@ -48,6 +48,7 @@ public class RecvThread extends Thread{
 				String id = message[0];
 				String turn = message[2];
 				String direction = message[3];
+				System.out.println("recv -------" + id);
 				
 				// make sure in the same turn
 				if(Integer.parseInt(turn) == this.game.turn) {
