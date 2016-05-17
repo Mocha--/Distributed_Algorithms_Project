@@ -19,4 +19,10 @@ public class Sender {
             s.sendMsg(msg);
         }
     }
+
+    public void close() throws IOException {
+        for (MySocket s:this.sockets){
+            s.end();
+        }
+    }
 }
