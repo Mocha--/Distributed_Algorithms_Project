@@ -5,32 +5,26 @@ import java.util.ArrayList;
 public class Client {
 	
 	public static int TOTAL_PLAYER_NUM = 2;
-    public static int port = 12000;
-    public static String address = "230.0.0.1";
+    public static int port = 8080;
     public static String JOIN_STAGE = "join";
     public static String PLAY_STATE = "play";
     public static int GAME_INTERVAL = 1000;
     // all nodes info
     public int[] nodes;
 
-    public MulticastSocket mss;
-    public InetAddress group;
-
     public String id;
     public String stage;
     public Game game;
     public Window window;
-
     public Sender sender;
-    public Receiver receiver;
-    public MulticastThread multicastThread;
-    public RecvThread recvThread;
-    public DrawThread drawThread;
+
     public ArrayList<MySocket> clientSockets;
     public ServerSocket serverSocket;
     public ArrayList<SessionThread> sessionThreads;
-    public CreateSessionThread createSessionThread;
     public UserInputThread userInputThread;
+    public StartPlayThread startPlayThread;
+    public MulticastThread multicastThread;
+    public DrawThread drawThread;
 
     public Client(String id) throws IOException{
     	try {
@@ -43,46 +37,36 @@ public class Client {
     			this.nodes[i] = 0;
     		}
 
-            this.multicastThread = new MulticastThread(this.sender, this.game, this.id);
-//            this.recvThread = new RecvThread(this.receiver, this.sender, this.game, this.id);
             this.serverSocket = new ServerSocket(this.port);
             this.sessionThreads = new ArrayList<SessionThread>();
             this.clientSockets = new ArrayList<MySocket>();
+            this.sender = new Sender(this.clientSockets);
             this.drawThread = new DrawThread(this.window);
 
             // join stage
-            this.createSessionThread = new CreateSessionThread(this);
             this.userInputThread = new UserInputThread(this);
+            this.startPlayThread = new StartPlayThread(this);
 
-            this.sender = new Sender(this.clientSockets);
+            // play stage
+            this.multicastThread = new MulticastThread(this);
+
+
     	} catch (Exception e) {
     		System.out.println("Client Init Error!");
     		System.out.println(e);
     	} 
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public void startPlay() {
-        if(this.stage.equals(Client.PLAY_STATE)){
-            this.multicastThread.start();
-            this.recvThread.start();
-            this.drawThread.start();
-        }
-    }
-
     public void joinGame() throws Exception {
         if (this.stage.equals(Client.JOIN_STAGE)){
-//            this.createSessionThread.start();
             this.userInputThread.start();
+            this.startPlayThread.start();
+
             for (int i = 0; i <= Client.TOTAL_PLAYER_NUM - 2; i++) {
                 Socket socket = this.serverSocket.accept();
                 this.beConnected(new MySocket(socket));
                 System.out.println("be connected");
             }
-            System.out.println("ready to start");
         }
     }
 

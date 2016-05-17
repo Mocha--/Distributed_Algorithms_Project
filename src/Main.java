@@ -9,7 +9,7 @@ public class Main {
 		try {
 			Client client = new Client("1");
 			client.joinGame();
-			client.startPlay();
+//			client.startPlay();
 		} catch (Exception e) {
 			System.out.println("Main Method Error!");
 			System.out.println(e);

@@ -45,17 +45,14 @@ public class UserInputThread extends Thread {
 
             try {
                 client.connectOthers(ip, port);
-                System.out.println("Connect Successfully, Waiting for Others: ");
+                System.out.println("Connect to one player");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
-        try {
-            sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        this.client.stage = Client.PLAY_STATE;
+        System.out.println("Connect to All, Waiting for Others: ");
     }
 
 }

@@ -1,19 +1,14 @@
 import java.lang.System;
-import java.net.NetworkInterface;
-import java.io.IOException;
-import java.net.DatagramPacket;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
 
 public class MulticastThread extends Thread {
 	public Sender sender;
 	public Game game;
 	public String id;
 	
-	public MulticastThread(Sender sender, Game game, String id) {
-		this.sender = sender;
-		this.game = game;
-		this.id = id;
+	public MulticastThread(Client client) {
+		this.sender = client.sender;
+		this.game = client.game;
+		this.id = client.id;
 	}
 	
 	public void run() {
@@ -22,7 +17,6 @@ public class MulticastThread extends Thread {
 				// send id, direction, turn
 				String[] message = Message.nextDirection(id, this.game.turn, this.game.mySnake.direction);
 				sender.send(message);
-				System.out.println(id);
 				Thread.sleep(Client.GAME_INTERVAL);
 			}
 		} catch(Exception e) {
