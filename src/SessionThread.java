@@ -46,7 +46,7 @@ public class SessionThread extends Thread {
     					this.client.nodes[nodeId]++ ;
     					// check
     					for(int i = 1; i <= Client.TOTAL_PLAYER_NUM ; i++) {
-    						if(this.client.nodes[i] == Client.TOTAL_PLAYER_NUM - 1) {
+    						if(this.client.nodes[i] == this.client.sessionThreads.size()) {
     							// change snake direction
     							this.client.game.getSnakeById(Integer.toString(i)).setDirection(direction);
     							// move the snake
