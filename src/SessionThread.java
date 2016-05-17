@@ -44,13 +44,18 @@ public class SessionThread extends Thread {
     							// move the snake
     							this.client.game.getSnakeById(Integer.toString(i)).move();
     							if(this.client.game.mySnake.isCrashingBorder() || this.client.game.mySnake.isCrashingAnyone(this.client.game.allSnakes)) {
-    								this.interrupt();
+    								this.client.sender.send(Message.gameOver(this.client.id));
+    								for(SessionThread s: this.client.sessionThreads) {
+    									s.interrupt();
+    								}
     							}
     							// reset the node record
     							this.client.nodes[i] = 0;
     						}
     					}
     				}
+            	} else if(type.equals(Message.GAME_OVER)) {
+            		this.interrupt();
             	}
 				sleep(0);
             }
