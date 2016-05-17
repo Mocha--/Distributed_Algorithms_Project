@@ -9,18 +9,17 @@ public class SessionThread extends Thread {
 
     public MySocket socket;
     public Client client;
-	public boolean isEnded;
 
     public SessionThread(MySocket socket, Client client) {
         this.socket = socket;
         this.client = client;
-		this.isEnded = false;
     }
 
     public void run() {
         try{
             while(true) {
-				if (this.isEnded){
+				if (this.client.stage.equals(Client.GAME_OVER_STAGE)){
+					System.out.println(this.client.id);
 					break;
 				}
             	// receive message
@@ -57,7 +56,7 @@ public class SessionThread extends Thread {
     									s.socket.end();
     								}
                                     this.client.sender.end();
-									this.isEnded = true;
+									this.client.stage = Client.GAME_OVER_STAGE;
 
     							}
     							// reset the node record
