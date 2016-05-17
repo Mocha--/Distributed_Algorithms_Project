@@ -7,7 +7,7 @@ public class Snake {
     public static String RIGHT = "right";
     public static String UP = "up";
     public static String DOWN = "down";
-    public static String DEFAULT_DIRECTION = "right";
+    public static String DEFAULT_DIRECTION = "down";
 
     public static Color COLOR_BLUE = Color.BLUE;
     public static Color COLOR_RED = Color.RED;
