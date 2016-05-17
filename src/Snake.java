@@ -80,13 +80,16 @@ public class Snake {
     }
 
     public boolean isCrashingSomeone(Snake snake){
+    	int count = 0;
         for (Coordinate coor : snake.body){
-            if (this.head.isSame(coor) && this.id.equals(snake.id)){
-                continue;
+            if (this.head.isSame(coor)) {
+                count ++;
             }
-            if (this.head.isSame(coor)){
-                return true;
-            }
+        }
+        if(count == 2 && this.id.equals(snake.id)) {
+        	return true;
+        } else if (count == 1 && !this.id.equals(snake.id)) {
+        	return true;
         }
         return false;
     }
