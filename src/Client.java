@@ -11,6 +11,8 @@ public class Client {
     public static String JOIN_STAGE = "join";
     public static String PLAY_STATE = "play";
     public static int GAME_INTERVAL = 1000;
+    // all nodes info
+    public int[] nodes;
 
     public MulticastSocket mss;
     public InetAddress group;
@@ -38,6 +40,10 @@ public class Client {
         	this.receiver = new Receiver(this.mss);
             NetworkInterface ni = NetworkInterface.getByName("etho0");
             this.mss.joinGroup(this.group);
+            this.nodes = new int[Client.TOTAL_PLAYER_NUM + 1];
+    		for(int i = 0; i < Client.TOTAL_PLAYER_NUM + 1; i++) {
+    			this.nodes[i] = 0;
+    		}
 
             this.multicastThread = new MulticastThread(this.sender, this.game, this.id);
             this.recvThread = new RecvThread(this.receiver, this.sender, this.game, this.id);
