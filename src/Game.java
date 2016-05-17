@@ -12,7 +12,7 @@ public class Game {
 		this.turn = 0;
 		this.mySnake = new Snake(id);
 		this.otherSnakes = new ArrayList<Snake>();
-		for(int i = 1 ; i <= 4; i++){
+		for(int i = 1 ; i <= Client.TOTAL_PLAYER_NUM; i++){
 			if (Integer.parseInt(id) != i){
 				Snake snake = new Snake(Integer.toString(i));
 				this.otherSnakes.add(snake);
