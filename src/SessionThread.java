@@ -43,6 +43,9 @@ public class SessionThread extends Thread {
     							this.client.game.getSnakeById(Integer.toString(i)).setDirection(direction);
     							// move the snake
     							this.client.game.getSnakeById(Integer.toString(i)).move();
+    							if(this.client.game.mySnake.isCrashingBorder() || this.client.game.mySnake.isCrashingAnyone(this.client.game.allSnakes)) {
+    								this.interrupt();
+    							}
     							// reset the node record
     							this.client.nodes[i] = 0;
     						}
