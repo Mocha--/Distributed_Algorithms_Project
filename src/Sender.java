@@ -7,20 +7,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Sender {
-    public InetAddress group;
-    public MulticastSocket mss;
 
-    public ArrayList<Socket> sockets;
+    public ArrayList<MySocket> sockets;
 
-    public Sender(MulticastSocket mss,InetAddress group){
-    	this.mss = mss;
-        this.group = group;
+    public Sender(ArrayList<MySocket> sockets){
+        this.sockets = sockets;
     }
 
     public void send(String[] msg) throws IOException{
-        String msgStr = Arrays.toString(msg);
-        byte[] buffer = msgStr.getBytes();
-        DatagramPacket dp = new DatagramPacket(buffer, buffer.length, this.group, Client.port);
-        this.mss.send(dp);
+        for (MySocket s:this.sockets){
+            s.sendMsg(msg);
+        }
     }
 }

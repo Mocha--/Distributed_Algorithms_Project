@@ -102,7 +102,7 @@ public class SessionThread extends Thread {
      * @return
      * @throws JSONException
      */
-    public SessionThread(MySocket socket, Room room) throws JSONException{
+    public SessionThread(MySocket socket, Client client) throws JSONException{
         this.socket = socket;
         this.room = room;
         this.id = SessionThread.assginId();

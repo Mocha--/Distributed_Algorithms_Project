@@ -1,7 +1,8 @@
+import sun.reflect.generics.scope.DummyScope;
+
 import java.io.IOException;
-import java.net.InetAddress;
-import java.net.MulticastSocket;
-import java.net.NetworkInterface;
+import java.net.*;
+import java.util.ArrayList;
 
 public class Client {
 	
@@ -25,6 +26,11 @@ public class Client {
     public MulticastThread multicastThread;
     public RecvThread recvThread;
     public DrawThread drawThread;
+    public ArrayList<MySocket> clientSockets;
+    public ServerSocket serverSocket;
+    public ArrayList<SessionThread> sessionThreads;
+    public CreateSessionThread createSessionThread;
+    public UserInputThread userInputThread;
 
     public Client(String id) throws IOException{
     	try {
@@ -41,7 +47,11 @@ public class Client {
 
             this.multicastThread = new MulticastThread(this.sender, this.game, this.id);
             this.recvThread = new RecvThread(this.receiver, this.sender, this.game, this.id);
+            this.serverSocket = new ServerSocket(this.port);
+            this.sessionThreads = new ArrayList<SessionThread>();
             this.drawThread = new DrawThread(this.window);
+            this.createSessionThread = new CreateSessionThread(this);
+            this.userInputThread = new UserInputThread(this);
     	} catch (Exception e) {
     		System.out.println("Client Init Error!");
     		System.out.println(e);
@@ -61,19 +71,22 @@ public class Client {
     }
 
     public void joinGame() throws Exception {
-        if (this.stage.equals(Client.PLAY_STATE)){
-            return;
+        if (this.stage.equals(Client.JOIN_STAGE)){
+            this.createSessionThread.start();
+            this.userInputThread.start();
         }
-    	this.sender.send(Message.joinGame(this.id));
-    	while(true){
-    		String[] msg = this.receiver.receive();
-    		if(this.id.equals(Integer.toString(Client.TOTAL_PLAYER_NUM)) && msg[0].equals(Integer.toString(Client.TOTAL_PLAYER_NUM))) {
-                this.sender.send(Message.startGame(this.id));
-            } else if(msg[0].equals(Integer.toString(Client.TOTAL_PLAYER_NUM)) && msg[1].equals(Message.START_GAME)){
-                this.stage = Client.PLAY_STATE;
-                break;
-            }
-    	}
+    }
+
+    public MySocket connectOthers(String ip, String port) throws IOException {
+        MySocket clientSocket = new MySocket(new Socket(ip, Integer.parseInt(port)));
+        this.clientSockets.add(clientSocket);
+        return clientSocket;
+    }
+
+    public SessionThread beConnected(MySocket mySocket){
+        SessionThread sessionThread = new SessionThread(mySocket, this);
+        this.sessionThreads.add(sessionThread);
+        return sessionThread;
     }
 
 }
