@@ -28,7 +28,6 @@ class KeyboardListener extends KeyAdapter{
 			direction = "down";
 			changeDirection(direction);
 		}
-		System.out.println(direction);
 	}
 	
 	private void changeDirection(String direction) {

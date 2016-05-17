@@ -25,7 +25,6 @@ public class SessionThread extends Thread {
                 if (message == null){
                     this.socket.end();
 					this.client.sessionThreads.remove(this);
-					System.out.println(this.client.sessionThreads.size());
 					if (this.client.sessionThreads.size() == 0){
 						this.client.sender.end();
 						this.client.stage = Client.GAME_WIN_STAGE;
