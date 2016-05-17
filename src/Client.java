@@ -67,7 +67,7 @@ public class Client {
             for (int i = 0; i <= Client.TOTAL_PLAYER_NUM - 2; i++) {
                 Socket socket = this.serverSocket.accept();
                 this.beConnected(new MySocket(socket));
-                System.out.println("be connected");
+                System.out.println("-----One Player Connected-----");
             }
         }
     }

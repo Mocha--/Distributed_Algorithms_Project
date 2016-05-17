@@ -18,7 +18,6 @@ public class MulticastThread extends Thread {
 				String[] message = Message.nextDirection(id, this.game.turn, this.game.mySnake.direction);
 				sender.send(message);
 				Thread.sleep(Client.GAME_INTERVAL);
-				this.game.turn += 1;
 			}
 		} catch(Exception e) {
 			System.out.println("Multicast Thread Error!");

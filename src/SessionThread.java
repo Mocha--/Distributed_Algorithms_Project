@@ -15,7 +15,7 @@ public class SessionThread extends Thread {
         try{
             while(true) {
 				if (this.client.stage.equals(Client.GAME_OVER_STAGE)){
-					System.out.println("-----Player " + this.client.id + " lose-----");
+					System.out.println("-----You Lose-----");
 					break;
 				}
 
@@ -29,7 +29,7 @@ public class SessionThread extends Thread {
 					if (this.client.sessionThreads.size() == 0){
 						this.client.sender.end();
 						this.client.stage = Client.GAME_WIN_STAGE;
-						System.out.println("-----Player " + this.client.id + " win-----");
+						System.out.println("-----You Win-----");
 					}
                     break;
                 }
