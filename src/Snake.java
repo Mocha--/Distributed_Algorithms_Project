@@ -81,6 +81,9 @@ public class Snake {
 
     public boolean isCrashingSomeone(Snake snake){
         for (Coordinate coor : snake.body){
+            if (this.head.isSame(coor) && this.id.equals(snake.id)){
+                continue;
+            }
             if (this.head.isSame(coor)){
                 return true;
             }
