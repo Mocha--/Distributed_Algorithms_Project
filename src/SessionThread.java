@@ -33,6 +33,7 @@ public class SessionThread extends Thread {
 					if (this.client.sessionThreads.size() == 0){
 						this.client.sender.end();
 						this.client.stage = Client.GAME_WIN_STAGE;
+						System.out.println(this.client.id + " win");
 					}
                     break;
                 }

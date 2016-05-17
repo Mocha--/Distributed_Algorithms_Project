@@ -34,7 +34,9 @@ public class Map {
 
 	public void drawSnake(Snake snake){
 		for (Coordinate coor : snake.body){
-			this.setPos(coor.row, coor.col, snake.color);
+			if (coor.row >= 0 && coor.row <= Map.height - 1 && coor.col >=0 && coor.col <= Map.width - 1){
+				this.setPos(coor.row, coor.col, snake.color);
+			}
 		}
 	}
 
