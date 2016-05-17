@@ -45,12 +45,11 @@ public class UserInputThread extends Thread {
 
             try {
                 client.connectOthers(ip, port);
+                System.out.println("Connect Successfully, Waiting for Others: ");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-
-        System.out.println("Connect Successfully, Waiting for Others: ");
 
         try {
             sleep(200);

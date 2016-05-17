@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Client {
 	
-	public static int TOTAL_PLAYER_NUM = 4;
+	public static int TOTAL_PLAYER_NUM = 2;
     public static int port = 12000;
     public static String address = "230.0.0.1";
     public static String JOIN_STAGE = "join";
@@ -39,7 +39,7 @@ public class Client {
     		this.id = id;
             this.game = new Game(this.id);
             this.window = new Window(this.game);
-    		this.stage = Client.PLAY_STATE;
+    		this.stage = Client.JOIN_STAGE;
             this.nodes = new int[Client.TOTAL_PLAYER_NUM + 1];
     		for(int i = 0; i < Client.TOTAL_PLAYER_NUM + 1; i++) {
     			this.nodes[i] = 0;
@@ -77,8 +77,14 @@ public class Client {
 
     public void joinGame() throws Exception {
         if (this.stage.equals(Client.JOIN_STAGE)){
-            this.createSessionThread.start();
+//            this.createSessionThread.start();
             this.userInputThread.start();
+            for (int i = 0; i <= Client.TOTAL_PLAYER_NUM - 2; i++) {
+                Socket socket = this.serverSocket.accept();
+                this.beConnected(new MySocket(socket));
+                System.out.println("be connected");
+            }
+            System.out.println("ready to start");
         }
     }
 
