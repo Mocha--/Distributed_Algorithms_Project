@@ -24,19 +24,19 @@ public class Snake {
         this.id = id;
         this.body = new ArrayList<Coordinate>();
         if (this.id.equals("1")){
-            Coordinate coor = new Coordinate(0, 0);
+            Coordinate coor = new Coordinate(5, 5);
             this.color = Snake.COLOR_BLUE;
             this.body.add(coor);
         } else if (this.id.equals("2")){
-            Coordinate coor = new Coordinate(0, Map.width - 1);
+            Coordinate coor = new Coordinate(5, Map.width - 6);
             this.color = Snake.COLOR_RED;
             this.body.add(coor);
         } else if(this.id.equals("3")) {
-            Coordinate coor = new Coordinate(Map.height - 1, Map.width - 1);
+            Coordinate coor = new Coordinate(Map.height - 6, 5);
             this.color = Snake.COLOR_BLACK;
             this.body.add(coor);
         } else if(this.id.equals("4")) {
-            Coordinate coor = new Coordinate(Map.height - 1, 0);
+            Coordinate coor = new Coordinate(Map.height - 6, Map.width - 6);
             this.color = Snake.COLOR_GREEN;
             this.body.add(coor);
         } else {
