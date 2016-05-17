@@ -33,7 +33,8 @@ public class SessionThread extends Thread {
     					// first time receive message from this node
     					if(this.client.nodes[nodeId] == 0) {
     						// send this message to other nodes
-    						this.socket.sendMsg(message);
+    						this.client.sender.send(message);
+//    						this.socket.sendMsg(message);
     						System.out.println("first time receive message from node " + nodeId);
     					}
     					this.client.nodes[nodeId]++ ;
