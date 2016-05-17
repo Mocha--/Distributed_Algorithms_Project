@@ -12,6 +12,8 @@ public class Client {
     public static String JOIN_STAGE = "join";
     public static String PLAY_STATE = "play";
     public static int GAME_INTERVAL = 1000;
+    // all nodes info
+    public int[] nodes;
 
     public MulticastSocket mss;
     public InetAddress group;
@@ -38,20 +40,23 @@ public class Client {
             this.game = new Game(this.id);
             this.window = new Window(this.game);
     		this.stage = Client.PLAY_STATE;
-        	this.mss = new MulticastSocket(Client.port);
-        	this.group = InetAddress.getByName(Client.address);
-        	this.sender = new Sender(this.mss, this.group);
-        	this.receiver = new Receiver(this.mss);
-            NetworkInterface ni = NetworkInterface.getByName("etho0");
-            this.mss.joinGroup(this.group);
+            this.nodes = new int[Client.TOTAL_PLAYER_NUM + 1];
+    		for(int i = 0; i < Client.TOTAL_PLAYER_NUM + 1; i++) {
+    			this.nodes[i] = 0;
+    		}
 
             this.multicastThread = new MulticastThread(this.sender, this.game, this.id);
-            this.recvThread = new RecvThread(this.receiver, this.sender, this.game, this.id);
+//            this.recvThread = new RecvThread(this.receiver, this.sender, this.game, this.id);
             this.serverSocket = new ServerSocket(this.port);
             this.sessionThreads = new ArrayList<SessionThread>();
+            this.clientSockets = new ArrayList<MySocket>();
             this.drawThread = new DrawThread(this.window);
+
+            // join stage
             this.createSessionThread = new CreateSessionThread(this);
             this.userInputThread = new UserInputThread(this);
+
+            this.sender = new Sender(this.clientSockets);
     	} catch (Exception e) {
     		System.out.println("Client Init Error!");
     		System.out.println(e);

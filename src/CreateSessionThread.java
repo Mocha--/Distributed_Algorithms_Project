@@ -7,17 +7,17 @@ import java.net.Socket;
  */
 public class CreateSessionThread extends Thread {
 
-    public ServerSocket serverSocket;
+    public Client client;
 
     public CreateSessionThread(Client client){
-        this.serverSocket = client.serverSocket;
+        this.client = client;
     }
 
     public void run(){
         for (int i = 0; i <= Client.TOTAL_PLAYER_NUM - 2; i++){
             try {
-                Socket socket = serverSocket.accept();
-                Client.beConnected(new MySocket(socket));
+                Socket socket = this.client.serverSocket.accept();
+                this.client.beConnected(new MySocket(socket));
 
             } catch (IOException e) {
                 e.printStackTrace();
