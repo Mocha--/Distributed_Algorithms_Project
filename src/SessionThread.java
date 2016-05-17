@@ -20,6 +20,10 @@ public class SessionThread extends Thread {
             while(true) {
             	// receive message
             	String[] message = this.socket.recvMsg();
+                if (message == null){
+                    this.socket.end();
+                    break;
+                }
             	String id = message[0];
             	String type = message[1];
             	// game is running
@@ -46,8 +50,9 @@ public class SessionThread extends Thread {
     							if(this.client.game.mySnake.isCrashingBorder() || this.client.game.mySnake.isCrashingAnyone(this.client.game.allSnakes)) {
     								this.client.sender.send(Message.gameOver(this.client.id));
     								for(SessionThread s: this.client.sessionThreads) {
-    									s.interrupt();
+    									s.socket.end();
     								}
+                                    this.client.sender.close();
     							}
     							// reset the node record
     							this.client.nodes[i] = 0;
@@ -57,13 +62,10 @@ public class SessionThread extends Thread {
             	} else if(type.equals(Message.GAME_OVER)) {
             		this.interrupt();
             	}
-				sleep(0);
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (InterruptedException e) {
-			e.printStackTrace();
-		} 
+        }
     }
 
 }
