@@ -31,11 +31,9 @@ public class SessionThread extends Thread {
     					// convert id from string to integer
     					int nodeId = Integer.parseInt(id);
     					// first time receive message from this node
-    					if(this.client.nodes[nodeId] == 0) {
+    					if(this.client.nodes[nodeId] == 0 && !this.client.id.equals(id)) {
     						// send this message to other nodes
     						this.client.sender.send(message);
-//    						this.socket.sendMsg(message);
-    						System.out.println("first time receive message from node " + nodeId);
     					}
     					this.client.nodes[nodeId]++ ;
     					// check
@@ -51,11 +49,13 @@ public class SessionThread extends Thread {
     					}
     				}
             	}
-				
+				sleep(0);
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } 
+        } catch (InterruptedException e) {
+			e.printStackTrace();
+		} 
     }
 
 }
