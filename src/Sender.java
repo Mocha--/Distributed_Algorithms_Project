@@ -20,7 +20,7 @@ public class Sender {
         }
     }
 
-    public void close() throws IOException {
+    public void end() throws IOException {
         for (MySocket s:this.sockets){
             s.end();
         }

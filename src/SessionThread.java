@@ -52,15 +52,13 @@ public class SessionThread extends Thread {
     								for(SessionThread s: this.client.sessionThreads) {
     									s.socket.end();
     								}
-                                    this.client.sender.close();
+                                    this.client.sender.end();
     							}
     							// reset the node record
     							this.client.nodes[i] = 0;
     						}
     					}
     				}
-            	} else if(type.equals(Message.GAME_OVER)) {
-            		this.interrupt();
             	}
             }
         } catch (IOException e) {
