@@ -13,7 +13,6 @@ public class SessionThread extends Thread {
     public SessionThread(MySocket socket, Client client) {
         this.socket = socket;
         this.client = client;
-        this.start();
     }
 
     public void run() {
@@ -24,7 +23,7 @@ public class SessionThread extends Thread {
             	String id = message[0];
             	String type = message[1];
             	// game is running
-            	if(type == Message.NEXT_DIRECTION) {
+            	if(type.equals(Message.NEXT_DIRECTION)) {
             		String turn = message[2];
     				String direction = message[3];
     				// in the same turn
@@ -39,7 +38,7 @@ public class SessionThread extends Thread {
     					}
     					this.client.nodes[nodeId]++ ;
     					// check
-    					for(int i = 1; i < 5; i++) {
+    					for(int i = 1; i <= Client.TOTAL_PLAYER_NUM ; i++) {
     						if(this.client.nodes[i] == Client.TOTAL_PLAYER_NUM - 1) {
     							// change snake direction
     							this.client.game.getSnakeById(Integer.toString(i)).setDirection(direction);
