@@ -20,7 +20,8 @@ public class StartPlayThread extends Thread {
                     sessionThread.start();
                 }
                 this.isInPlay = true;
-                System.out.println("game start");
+                System.out.println("-----Game Start-----");
+                break;
             }
 
             try {

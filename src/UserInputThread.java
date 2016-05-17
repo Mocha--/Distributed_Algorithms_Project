@@ -29,8 +29,9 @@ public class UserInputThread extends Thread {
     }
 
     public void run(){
-        System.out.println("Please Enter Others' Ip Address: ");
+        System.out.println("-----Please Enter Other Players' Ip Addresses: -----");
         for (int i = 0; i <= Client.TOTAL_PLAYER_NUM - 2; i++){
+            System.out.println("-----Please Enter Player " + Integer.toString(i + 1) + " Ip and Port: -----");
             this.userIn = new BufferedReader(new InputStreamReader(System.in));
             String input = null;
 
@@ -45,14 +46,14 @@ public class UserInputThread extends Thread {
 
             try {
                 client.connectOthers(ip, port);
-                System.out.println("Connect to one player");
+                System.out.println("-----Connect to Player " + Integer.toString(i + 1) + " -----");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
 
         this.client.stage = Client.PLAY_STAGE;
-        System.out.println("Connect to All, Waiting for Others: ");
+        System.out.println("-----Already Connected to All Players-----");
     }
 
 }

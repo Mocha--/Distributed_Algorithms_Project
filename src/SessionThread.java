@@ -1,8 +1,4 @@
 import java.io.IOException;
-import java.nio.channels.SelectableChannel;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class SessionThread extends Thread {
 
@@ -19,7 +15,7 @@ public class SessionThread extends Thread {
         try{
             while(true) {
 				if (this.client.stage.equals(Client.GAME_OVER_STAGE)){
-					System.out.println(this.client.id);
+					System.out.println("-----Player " + this.client.id + " lose-----");
 					break;
 				}
 
@@ -33,7 +29,7 @@ public class SessionThread extends Thread {
 					if (this.client.sessionThreads.size() == 0){
 						this.client.sender.end();
 						this.client.stage = Client.GAME_WIN_STAGE;
-						System.out.println(this.client.id + " win");
+						System.out.println("-----Player " + this.client.id + " win-----");
 					}
                     break;
                 }
