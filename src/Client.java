@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Client {
 	
-	public static int TOTAL_PLAYER_NUM = 3;
+	public static int TOTAL_PLAYER_NUM = 4;
     public static int port = 8080;
     public static String JOIN_STAGE = "join";
     public static String PLAY_STAGE = "play";
