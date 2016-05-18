@@ -17,7 +17,9 @@ public class Sender {
 
     public void end() throws IOException {
         for (MySocket s:this.sockets){
-            s.end();
+        	if(!s.socket.isClosed()) {
+        		 s.end();
+        	}  
         }
     }
 }
