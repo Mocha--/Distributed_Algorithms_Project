@@ -11,9 +11,11 @@ public class SessionThread extends Thread {
         this.client = client;
     }
 
+	// this thread is the main implementation of R-multicast
     public void run() {
         try{
             while(true) {
+				// if game over, quit
 				if (this.client.stage.equals(Client.GAME_OVER_STAGE)){
 					System.out.println("-----You Lose-----");
 					break;
@@ -49,6 +51,7 @@ public class SessionThread extends Thread {
     						// send this message to other nodes
     						this.client.sender.send(message);
     					}
+						// record how many messages about other players the player has got
     					this.client.nodes[nodeId]++ ;
     					// check
     					for(int i = 1; i <= Client.TOTAL_PLAYER_NUM ; i++) {

@@ -14,6 +14,7 @@ public class DrawThread extends Thread {
     public void run(){
         try {
             while (true) {
+                // if the game is not over, we just go on playing
                 if (this.client.stage.equals(Client.GAME_OVER_STAGE)){
                     break;
                 }

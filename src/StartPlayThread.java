@@ -2,9 +2,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-/**
- * Created by mocha on 17/05/16.
- */
 public class StartPlayThread extends Thread {
 
     public Client client;
@@ -17,6 +14,7 @@ public class StartPlayThread extends Thread {
 
     public void run(){
         while(true){
+            // this thread is runing until game starts
             if (this.client.stage.equals(Client.PLAY_STAGE) && this.isInPlay == false && this.client.sessionThreads.size() == Client.TOTAL_PLAYER_NUM - 1){
                 this.client.drawThread.start();
                 this.client.multicastThread.start();

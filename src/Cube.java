@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 
 public class Cube extends JPanel {
 	/**
-	 * 
+	 * drawing squares
 	 */
 	private static final long serialVersionUID = 1L;
 	private int height = 22;   

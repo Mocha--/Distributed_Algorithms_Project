@@ -13,7 +13,8 @@ public class MulticastThread extends Thread {
 		this.game = client.game;
 		this.id = client.id;
 	}
-	
+
+	// multicast messages to other players
 	public void run() {
 		try {
 			while(true){

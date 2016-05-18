@@ -24,10 +24,10 @@ public class UserInputThread extends Thread {
      */
     public UserInputThread(Client client){
         this.client = client;
-//        this.start();
     }
 
     public void run(){
+        // waiting user input until connecting to all players
         System.out.println("-----Please Enter Other Players' Ip Addresses: -----");
         for (int i = 0; i <= Client.TOTAL_PLAYER_NUM - 2; i++){
             System.out.println("-----Please Enter Player " + Integer.toString(i + 1) + " Ip and Port: -----");
@@ -44,6 +44,7 @@ public class UserInputThread extends Thread {
             String port = input.split(",")[1];
 
             try {
+                // connect to others
                 client.connectOthers(ip, port);
                 System.out.println("-----Connect to Player " + Integer.toString(i + 1) + " -----");
             } catch (IOException e) {

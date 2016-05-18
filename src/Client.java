@@ -3,13 +3,20 @@ import java.net.*;
 import java.util.ArrayList;
 
 public class Client {
-	
+
+    // total player number
 	public static int TOTAL_PLAYER_NUM = 4;
+    // the port where server is established
     public static int port = 8080;
+    // game stage constant
     public static String JOIN_STAGE = "join";
+    // game stage constant
     public static String PLAY_STAGE = "play";
+    // game stage constant
     public static String GAME_OVER_STAGE = "gameover";
+    // game stage constant
     public static String GAME_WIN_STAGE = "gamewin";
+    // the interval of every movement
     public static int GAME_INTERVAL = 1000;
     // all nodes info
     public int[] nodes;
@@ -20,12 +27,19 @@ public class Client {
     public Window window;
     public Sender sender;
 
+    // socket list
     public ArrayList<MySocket> clientSockets;
+    // server socket
     public ServerSocket serverSocket;
+    // session thread list
     public ArrayList<SessionThread> sessionThreads;
+    // userinput thread which is runing before the game starts
     public UserInputThread userInputThread;
+    // a thread to start game
     public StartPlayThread startPlayThread;
+    // a thread to send messages
     public MulticastThread multicastThread;
+    // a thread to draw UI
     public DrawThread drawThread;
 
     public Client(String id) throws IOException{
@@ -59,6 +73,7 @@ public class Client {
     	} 
     }
 
+    // join the game
     public void joinGame() throws Exception {
         if (this.stage.equals(Client.JOIN_STAGE)){
             this.userInputThread.start();
@@ -72,12 +87,14 @@ public class Client {
         }
     }
 
+    // connect to other player
     public MySocket connectOthers(String ip, String port) throws IOException {
         MySocket clientSocket = new MySocket(new Socket(ip, Integer.parseInt(port)));
         this.clientSockets.add(clientSocket);
         return clientSocket;
     }
 
+    // being connected by other players
     public SessionThread beConnected(MySocket mySocket){
         SessionThread sessionThread = new SessionThread(mySocket, this);
         this.sessionThreads.add(sessionThread);

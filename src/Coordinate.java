@@ -1,6 +1,4 @@
-/**
- * Created by mocha on 16/05/16.
- */
+// class for coordinate on map
 public class Coordinate {
     public int row;
     public int col;

@@ -3,7 +3,7 @@ import javax.swing.JFrame;
 
 public class Window extends JFrame {
 	/**
-	 * 
+	 *  this class is for creating UI window
 	 */
 	private static final long serialVersionUID = 1L;
 	public Game game;
