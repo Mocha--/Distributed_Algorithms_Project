@@ -10,7 +10,7 @@ public class Client {
     public static String PLAY_STAGE = "play";
     public static String GAME_OVER_STAGE = "gameover";
     public static String GAME_WIN_STAGE = "gamewin";
-    public static int GAME_INTERVAL = 2000;
+    public static int GAME_INTERVAL = 1000;
     // all nodes info
     public int[] nodes;
 
