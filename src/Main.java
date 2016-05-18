@@ -8,7 +8,7 @@ public class Main {
 			Client client = new Client(args[0]);
 			client.joinGame();
 		} catch (Exception e) {
-			System.out.println("Main Method Error!");
+			System.out.println("Please pass arguments from terminal!");
 			System.out.println(e);
 		}
 	}
