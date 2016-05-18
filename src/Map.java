@@ -3,8 +3,8 @@ import java.util.ArrayList;
 
 public class Map {
 
-	public static int width = 30;
-	public static int height = 30;
+	public static int width = 15;
+	public static int height = 15;
 	public static Color EMPTY_COLOR = Color.GRAY;
 
 	public Color[][] pos;
